@@ -1,7 +1,7 @@
 # %%
 #auto reload the code
-%load_ext autoreload
-%autoreload 2
+# %load_ext autoreload
+# %autoreload 2
 
 # %%
 #data initialization
