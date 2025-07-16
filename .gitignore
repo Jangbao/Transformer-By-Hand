@@ -1,0 +1,17 @@
+*~
+*.o
+*build*/
+./models/
+__pycache__/
+.vscode
+.idea
+./translation
+.cache
+*.npy
+*.pth
+!tests/data/**/*.npy
+/models
+/notebooks
+result/*
+saved/* 
+**/.ipynb_checkpoints/
