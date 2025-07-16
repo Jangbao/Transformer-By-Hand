@@ -18,7 +18,7 @@ test_loss_path = result_path + "test_loss.txt"
 bleu_path = result_path + "bleu.txt"
 
 # model parameter setting
-device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 d_model = 512
 d_k = 64
 d_v = 64
