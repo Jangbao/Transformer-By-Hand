@@ -19,8 +19,6 @@ class Decoder(nn.Module):
         ||
         Linear: 将x进行线性计算，得到x (batch_size, seq_len, vocab_size)
         ||
-        Softmax: 将x进行softmax计算，得到probalities (batch_size, seq_len, vocab_size)
-        ||
     output: (batch_size, seq_len, vocab_size)
     """
     def __init__(self, d_model, vocab_size, d_k, d_v, n_heads, max_len, d_ff, n_layers, dropout, device):
@@ -43,7 +41,6 @@ class Decoder(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.layers = nn.ModuleList([decoder_layer.DecoderLayer(d_model, d_k, d_v, n_heads, d_ff, dropout) for _ in range(n_layers)])
         self.linear = nn.Linear(d_model, vocab_size)
-        self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x, encoder_output, mask=None):
 
@@ -66,7 +63,4 @@ class Decoder(nn.Module):
         logging.debug("running decoder linear start...")
         x = self.linear(x)
         logging.debug("running decoder linear finished.")
-        logging.debug("running decoder softmax start...")
-        x = self.softmax(x)
-        logging.debug("running decoder softmax finished.")
         return x

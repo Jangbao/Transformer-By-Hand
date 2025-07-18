@@ -16,8 +16,9 @@ from torch.optim import Adam
 from torch import nn, optim
 from util.Bleu import *
 from util.EpochTimer import *
+import logging
 
-
+logging.info("running in device: %s", device)
 
 # %%
 #model initialization 
@@ -120,7 +121,6 @@ def train(model, iterator, optimizer, criterion, clip):
 
     return epoch_loss / len(iterator)
 
-
 def evaluate(model, iterator, criterion):
     """
     评估模型
@@ -149,6 +149,7 @@ def evaluate(model, iterator, criterion):
                     trg_words = idx_to_word(batch.trg[j], loader.target.vocab)
                     output_words = output[j].max(dim=1)[1]
                     output_words = idx_to_word(output_words, loader.target.vocab)
+                    logging.debug(f"output_words: {output_words}, trg_words: {trg_words}")
                     bleu = get_bleu(hypotheses=output_words.split(), reference=trg_words.split())
                     total_bleu.append(bleu)
                 except:
